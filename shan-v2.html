@@ -1,0 +1,1006 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Newsletter Design Portfolio | SHAN</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #333;
+            --secondary-color: #f5f5f5;
+            --accent-color: #6a11cb;
+            --text-color: #444;
+            --light-gray: #f9f9f9;
+            --dark-gray: #222;
+            --transition: all 0.3s ease;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Helvetica Neue', Arial, sans-serif;
+            line-height: 1.6;
+            color: var(--text-color);
+            background-color: #fff;
+        }
+
+        /* Header Styles */
+        header {
+            background-color: #fff;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            transition: var(--transition);
+        }
+
+        .header-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--dark-gray);
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .logo:hover {
+            color: var(--accent-color);
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+
+        nav ul li {
+            margin-left: 30px;
+        }
+
+        nav ul li a {
+            text-decoration: none;
+            color: var(--text-color);
+            font-weight: 500;
+            position: relative;
+            transition: var(--transition);
+        }
+
+        nav ul li a:after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: var(--accent-color);
+            transition: var(--transition);
+        }
+
+        nav ul li a:hover:after {
+            width: 100%;
+        }
+
+        .menu-toggle {
+            display: none;
+            font-size: 24px;
+            cursor: pointer;
+        }
+
+        /* Hero Section */
+        .hero {
+            padding: 150px 20px 80px;
+            text-align: center;
+            background-color: var(--light-gray);
+        }
+
+        .hero h1 {
+            font-size: 48px;
+            margin-bottom: 20px;
+            color: var(--dark-gray);
+        }
+
+        .hero p {
+            font-size: 20px;
+            max-width: 800px;
+            margin: 0 auto 40px;
+            color: var(--text-color);
+        }
+
+        .hero-btn {
+            display: inline-block;
+            padding: 12px 30px;
+            background-color: var(--accent-color);
+            color: white;
+            text-decoration: none;
+            border-radius: 4px;
+            font-weight: 500;
+            transition: var(--transition);
+        }
+
+        .hero-btn:hover {
+            background-color: #5710a3;
+            transform: translateY(-2px);
+        }
+
+        /* Filter Section */
+        .filter-section {
+            padding: 40px 20px;
+            text-align: center;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .filter-buttons {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin-bottom: 40px;
+        }
+
+        .filter-btn {
+            padding: 8px 20px;
+            background-color: transparent;
+            border: 1px solid #ddd;
+            border-radius: 30px;
+            cursor: pointer;
+            transition: var(--transition);
+            font-weight: 500;
+        }
+
+        .filter-btn.active, .filter-btn:hover {
+            background-color: var(--accent-color);
+            color: white;
+            border-color: var(--accent-color);
+        }
+
+        /* Portfolio Grid */
+        .portfolio-section {
+            padding: 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .portfolio-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 30px;
+        }
+
+        .portfolio-item {
+            position: relative;
+            overflow: hidden;
+            border-radius: 8px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: var(--transition);
+            cursor: pointer;
+        }
+
+        .portfolio-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        }
+
+        .portfolio-image {
+            width: 100%;
+            height: 450px;
+            object-fit: cover;
+            display: block;
+        }
+
+        .portfolio-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to top, rgba(0, 0, 0, 0.8) 0%, rgba(0, 0, 0, 0) 60%);
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            padding: 30px;
+            opacity: 0;
+            transition: var(--transition);
+        }
+
+        .portfolio-item:hover .portfolio-overlay {
+            opacity: 1;
+        }
+
+        .portfolio-title {
+            color: white;
+            font-size: 24px;
+            margin-bottom: 10px;
+            transform: translateY(20px);
+            transition: var(--transition);
+        }
+
+        .portfolio-category {
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transform: translateY(20px);
+            transition: var(--transition);
+            transition-delay: 0.1s;
+        }
+
+        .portfolio-item:hover .portfolio-title,
+        .portfolio-item:hover .portfolio-category {
+            transform: translateY(0);
+        }
+
+        /* Modal Styles */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.9);
+            z-index: 2000;
+            overflow-y: auto;
+        }
+
+        .modal-content {
+            max-width: 900px;
+            margin: 50px auto;
+            background-color: white;
+            border-radius: 8px;
+            overflow: hidden;
+            position: relative;
+            animation: modalFadeIn 0.5s;
+        }
+
+        @keyframes modalFadeIn {
+            from { opacity: 0; transform: scale(0.9); }
+            to { opacity: 1; transform: scale(1); }
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            font-size: 30px;
+            color: white;
+            cursor: pointer;
+            z-index: 2001;
+            background-color: rgba(0, 0, 0, 0.5);
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: var(--transition);
+        }
+
+        .modal-close:hover {
+            background-color: rgba(0, 0, 0, 0.8);
+        }
+
+        .modal-image {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        .modal-info {
+            padding: 30px;
+        }
+
+        .modal-title {
+            font-size: 28px;
+            margin-bottom: 15px;
+            color: var(--dark-gray);
+        }
+
+        .modal-category {
+            display: inline-block;
+            padding: 5px 15px;
+            background-color: var(--secondary-color);
+            border-radius: 30px;
+            font-size: 14px;
+            margin-bottom: 20px;
+            color: var(--text-color);
+        }
+
+        .modal-description {
+            margin-bottom: 30px;
+            line-height: 1.7;
+        }
+
+        .modal-details {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .detail-item {
+            display: flex;
+            align-items: center;
+        }
+
+        .detail-icon {
+            margin-right: 10px;
+            color: var(--accent-color);
+        }
+
+        .modal-buttons {
+            display: flex;
+            gap: 15px;
+        }
+
+        .modal-btn {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: 500;
+            transition: var(--transition);
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .modal-btn-primary {
+            background-color: var(--accent-color);
+            color: white;
+        }
+
+        .modal-btn-primary:hover {
+            background-color: #5710a3;
+        }
+
+        .modal-btn-secondary {
+            background-color: transparent;
+            color: var(--accent-color);
+            border: 1px solid var(--accent-color);
+        }
+
+        .modal-btn-secondary:hover {
+            background-color: rgba(106, 17, 203, 0.1);
+        }
+
+        /* About Section */
+        .about-section {
+            padding: 80px 20px;
+            background-color: var(--light-gray);
+        }
+
+        .about-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 50px;
+            align-items: center;
+        }
+
+        .about-image {
+            width: 100%;
+            border-radius: 8px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .about-content h2 {
+            font-size: 36px;
+            margin-bottom: 20px;
+            color: var(--dark-gray);
+        }
+
+        .about-content p {
+            margin-bottom: 20px;
+            line-height: 1.7;
+        }
+
+        .skills {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 30px;
+        }
+
+        .skill-tag {
+            padding: 8px 15px;
+            background-color: white;
+            border-radius: 30px;
+            font-size: 14px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+        }
+
+        /* Contact Section */
+        .contact-section {
+            padding: 80px 20px;
+            text-align: center;
+        }
+
+        .contact-container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .contact-section h2 {
+            font-size: 36px;
+            margin-bottom: 20px;
+            color: var(--dark-gray);
+        }
+
+        .contact-section p {
+            margin-bottom: 40px;
+            font-size: 18px;
+        }
+
+        .contact-form {
+            display: grid;
+            gap: 20px;
+            text-align: left;
+        }
+
+        .form-group {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        .form-control {
+            padding: 15px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 16px;
+            transition: var(--transition);
+        }
+
+        .form-control:focus {
+            outline: none;
+            border-color: var(--accent-color);
+        }
+
+        textarea.form-control {
+            min-height: 150px;
+            resize: vertical;
+        }
+
+        .submit-btn {
+            padding: 15px 30px;
+            background-color: var(--accent-color);
+            color: white;
+            border: none;
+            border-radius: 4px;
+            font-size: 16px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .submit-btn:hover {
+            background-color: #5710a3;
+        }
+
+        /* Footer */
+        footer {
+            padding: 40px 20px;
+            background-color: var(--dark-gray);
+            color: white;
+            text-align: center;
+        }
+
+        .social-links {
+            margin-bottom: 20px;
+        }
+
+        .social-links a {
+            display: inline-block;
+            width: 40px;
+            height: 40px;
+            line-height: 40px;
+            text-align: center;
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            color: white;
+            margin: 0 10px;
+            transition: var(--transition);
+        }
+
+        .social-links a:hover {
+            background-color: var(--accent-color);
+            transform: translateY(-3px);
+        }
+
+        /* Responsive Styles */
+        @media (max-width: 992px) {
+            .about-container {
+                grid-template-columns: 1fr;
+            }
+
+            .form-group {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .menu-toggle {
+                display: block;
+            }
+
+            nav ul {
+                position: absolute;
+                top: 70px;
+                left: 0;
+                width: 100%;
+                background-color: white;
+                flex-direction: column;
+                padding: 20px;
+                box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+                transform: translateY(-100vh);
+                transition: var(--transition);
+            }
+
+            nav ul.active {
+                transform: translateY(0);
+            }
+
+            nav ul li {
+                margin: 10px 0;
+            }
+
+            .hero h1 {
+                font-size: 36px;
+            }
+
+            .portfolio-grid {
+                grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            }
+
+            .modal-content {
+                margin: 20px;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .hero h1 {
+                font-size: 28px;
+            }
+
+            .hero p {
+                font-size: 16px;
+            }
+
+            .portfolio-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="header-container">
+            <a href="#" class="logo">SHAN</a>
+            <nav>
+                <ul>
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#portfolio">Portfolio</a></li>
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </nav>
+            <div class="menu-toggle">
+                <i class="fas fa-bars"></i>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <h1>Newsletter Design Portfolio</h1>
+        <p>Crafting beautiful and effective email newsletters that engage subscribers and drive results</p>
+        <a href="#portfolio" class="hero-btn">View My Work</a>
+    </section>
+
+    <!-- Filter Section -->
+    <section class="filter-section">
+        <div class="filter-buttons">
+            <button class="filter-btn active" data-filter="all">All</button>
+            <button class="filter-btn" data-filter="corporate">Corporate</button>
+            <button class="filter-btn" data-filter="ecommerce">E-commerce</button>
+            <button class="filter-btn" data-filter="creative">Creative</button>
+            <button class="filter-btn" data-filter="minimal">Minimal</button>
+        </div>
+    </section>
+
+    <!-- Portfolio Section -->
+    <section id="portfolio" class="portfolio-section">
+        <div class="portfolio-grid">
+            <!-- Portfolio Item 1 -->
+            <div class="portfolio-item" data-category="corporate">
+                <img src="https://picsum.photos/seed/newsletter1/600/800.jpg" alt="Corporate Newsletter" class="portfolio-image">
+                <div class="portfolio-overlay">
+                    <h3 class="portfolio-title">TechCorp Newsletter</h3>
+                    <p class="portfolio-category">Corporate</p>
+                </div>
+            </div>
+
+            <!-- Portfolio Item 2 -->
+            <div class="portfolio-item" data-category="ecommerce">
+                <img src="https://picsum.photos/seed/newsletter2/600/800.jpg" alt="E-commerce Newsletter" class="portfolio-image">
+                <div class="portfolio-overlay">
+                    <h3 class="portfolio-title">Fashion Store Sale</h3>
+                    <p class="portfolio-category">E-commerce</p>
+                </div>
+            </div>
+
+            <!-- Portfolio Item 3 -->
+            <div class="portfolio-item" data-category="creative">
+                <img src="https://picsum.photos/seed/newsletter3/600/800.jpg" alt="Creative Newsletter" class="portfolio-image">
+                <div class="portfolio-overlay">
+                    <h3 class="portfolio-title">Art Gallery Exhibition</h3>
+                    <p class="portfolio-category">Creative</p>
+                </div>
+            </div>
+
+            <!-- Portfolio Item 4 -->
+            <div class="portfolio-item" data-category="minimal">
+                <img src="https://picsum.photos/seed/newsletter4/600/800.jpg" alt="Minimal Newsletter" class="portfolio-image">
+                <div class="portfolio-overlay">
+                    <h3 class="portfolio-title">Minimalist Design</h3>
+                    <p class="portfolio-category">Minimal</p>
+                </div>
+            </div>
+
+            <!-- Portfolio Item 5 -->
+            <div class="portfolio-item" data-category="corporate">
+                <img src="https://picsum.photos/seed/newsletter5/600/800.jpg" alt="Corporate Newsletter" class="portfolio-image">
+                <div class="portfolio-overlay">
+                    <h3 class="portfolio-title">Finance Weekly Update</h3>
+                    <p class="portfolio-category">Corporate</p>
+                </div>
+            </div>
+
+            <!-- Portfolio Item 6 -->
+            <div class="portfolio-item" data-category="ecommerce">
+                <img src="https://picsum.photos/seed/newsletter6/600/800.jpg" alt="E-commerce Newsletter" class="portfolio-image">
+                <div class="portfolio-overlay">
+                    <h3 class="portfolio-title">Product Launch</h3>
+                    <p class="portfolio-category">E-commerce</p>
+                </div>
+            </div>
+
+            <!-- Portfolio Item 7 -->
+            <div class="portfolio-item" data-category="creative">
+                <img src="https://picsum.photos/seed/newsletter7/600/800.jpg" alt="Creative Newsletter" class="portfolio-image">
+                <div class="portfolio-overlay">
+                    <h3 class="portfolio-title">Photography Showcase</h3>
+                    <p class="portfolio-category">Creative</p>
+                </div>
+            </div>
+
+            <!-- Portfolio Item 8 -->
+            <div class="portfolio-item" data-category="minimal">
+                <img src="https://picsum.photos/seed/newsletter8/600/800.jpg" alt="Minimal Newsletter" class="portfolio-image">
+                <div class="portfolio-overlay">
+                    <h3 class="portfolio-title">Simple & Clean</h3>
+                    <p class="portfolio-category">Minimal</p>
+                </div>
+            </div>
+
+            <!-- Portfolio Item 9 -->
+            <div class="portfolio-item" data-category="corporate">
+                <img src="https://picsum.photos/seed/newsletter9/600/800.jpg" alt="Corporate Newsletter" class="portfolio-image">
+                <div class="portfolio-overlay">
+                    <h3 class="portfolio-title">Healthcare Newsletter</h3>
+                    <p class="portfolio-category">Corporate</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Modal -->
+    <div id="portfolioModal" class="modal">
+        <span class="modal-close">&times;</span>
+        <div class="modal-content">
+            <img src="" alt="" class="modal-image">
+            <div class="modal-info">
+                <h2 class="modal-title"></h2>
+                <span class="modal-category"></span>
+                <p class="modal-description"></p>
+                <div class="modal-details">
+                    <div class="detail-item">
+                        <i class="fas fa-calendar detail-icon"></i>
+                        <span class="detail-text"></span>
+                    </div>
+                    <div class="detail-item">
+                        <i class="fas fa-user detail-icon"></i>
+                        <span class="detail-text"></span>
+                    </div>
+                    <div class="detail-item">
+                        <i class="fas fa-tags detail-icon"></i>
+                        <span class="detail-text"></span>
+                    </div>
+                    <div class="detail-item">
+                        <i class="fas fa-eye detail-icon"></i>
+                        <span class="detail-text"></span>
+                    </div>
+                </div>
+                <div class="modal-buttons">
+                    <a href="#" class="modal-btn modal-btn-primary">View Live</a>
+                    <a href="#" class="modal-btn modal-btn-secondary">Download</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- About Section -->
+    <section id="about" class="about-section">
+        <div class="about-container">
+            <div class="about-image-container">
+                <img src="https://picsum.photos/seed/designer/600/600.jpg" alt="About Me" class="about-image">
+            </div>
+            <div class="about-content">
+                <h2>About Me</h2>
+                <p>I'm a passionate newsletter designer with over 5 years of experience creating compelling email campaigns for businesses of all sizes. My approach combines aesthetic appeal with strategic thinking to deliver newsletters that not only look great but also drive engagement and conversions.</p>
+                <p>I specialize in creating responsive, accessible, and visually striking email designs that work across all email clients and devices. From corporate communications to creative marketing campaigns, I bring a unique perspective to every project.</p>
+                <div class="skills">
+                    <span class="skill-tag">Email Design</span>
+                    <span class="skill-tag">HTML/CSS</span>
+                    <span class="skill-tag">Responsive Design</span>
+                    <span class="skill-tag">Marketing Strategy</span>
+                    <span class="skill-tag">Brand Identity</span>
+                    <span class="skill-tag">Adobe Creative Suite</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="contact-section">
+        <div class="contact-container">
+            <h2>Get In Touch</h2>
+            <p>Have a project in mind or want to discuss your newsletter design needs? I'd love to hear from you!</p>
+            <form class="contact-form" id="contactForm">
+                <div class="form-group">
+                    <input type="text" class="form-control" placeholder="SHAN" required>
+                    <input type="email" class="form-control" placeholder="Your Email" required>
+                </div>
+                <input type="text" class="form-control" placeholder="Subject" required>
+                <textarea class="form-control" placeholder="Your Message" required></textarea>
+                <button type="submit" class="submit-btn">Send Message</button>
+            </form>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="social-links">
+            <a href="#"><i class="fab fa-behance"></i></a>
+            <a href="#"><i class="fab fa-dribbble"></i></a>
+            <a href="#"><i class="fab fa-linkedin-in"></i></a>
+            <a href="#"><i class="fab fa-instagram"></i></a>
+        </div>
+        <p>&copy; 2023 SHAN. All Rights Reserved.</p>
+    </footer>
+
+    <script>
+        // Mobile Menu Toggle
+        document.querySelector('.menu-toggle').addEventListener('click', function() {
+            document.querySelector('nav ul').classList.toggle('active');
+        });
+
+        // Smooth Scrolling
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+                // Close mobile menu if open
+                document.querySelector('nav ul').classList.remove('active');
+            });
+        });
+
+        // Portfolio Filter
+        const filterButtons = document.querySelectorAll('.filter-btn');
+        const portfolioItems = document.querySelectorAll('.portfolio-item');
+
+        filterButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                // Remove active class from all buttons
+                filterButtons.forEach(btn => btn.classList.remove('active'));
+                // Add active class to clicked button
+                button.classList.add('active');
+                
+                const filterValue = button.getAttribute('data-filter');
+                
+                portfolioItems.forEach(item => {
+                    if (filterValue === 'all' || item.getAttribute('data-category') === filterValue) {
+                        item.style.display = 'block';
+                    } else {
+                        item.style.display = 'none';
+                    }
+                });
+            });
+        });
+
+        // Modal Functionality
+        const modal = document.getElementById('portfolioModal');
+        const modalClose = document.querySelector('.modal-close');
+        const portfolioItemsForModal = document.querySelectorAll('.portfolio-item');
+        
+        // Portfolio item data
+        const portfolioData = {
+            1: {
+                title: "TechCorp Newsletter",
+                category: "Corporate",
+                description: "A modern and professional newsletter design for TechCorp, featuring a clean layout with strategic use of white space and brand colors. The design highlights key company updates, industry news, and upcoming events with clear call-to-action buttons.",
+                date: "June 15, 2023",
+                client: "TechCorp Inc.",
+                tags: "Corporate, Professional, Technology",
+                views: "1,250"
+            },
+            2: {
+                title: "Fashion Store Sale",
+                category: "E-commerce",
+                description: "An eye-catching e-commerce newsletter for a seasonal sale event. The design features bold typography, vibrant product imagery, and strategically placed discount codes to drive conversions and increase sales.",
+                date: "May 28, 2023",
+                client: "Fashion Boutique",
+                tags: "E-commerce, Fashion, Sale",
+                views: "2,340"
+            },
+            3: {
+                title: "Art Gallery Exhibition",
+                category: "Creative",
+                description: "A visually striking newsletter for an upcoming art exhibition. The design incorporates artistic elements and showcases featured artworks with an elegant layout that reflects the gallery's sophisticated aesthetic.",
+                date: "April 10, 2023",
+                client: "Modern Art Gallery",
+                tags: "Creative, Art, Exhibition",
+                views: "890"
+            },
+            4: {
+                title: "Minimalist Design",
+                category: "Minimal",
+                description: "A clean and minimalist newsletter design that focuses on typography and whitespace. The perfect example of how less can be more, with a subtle color palette and simple layout that delivers the message effectively.",
+                date: "March 22, 2023",
+                client: "Minimal Studio",
+                tags: "Minimal, Typography, Clean",
+                views: "1,120"
+            },
+            5: {
+                title: "Finance Weekly Update",
+                category: "Corporate",
+                description: "A professional newsletter for a financial services company, featuring market insights, investment tips, and company news. The design balances data visualization with clear information hierarchy.",
+                date: "February 14, 2023",
+                client: "Finance Solutions Ltd.",
+                tags: "Corporate, Finance, Data",
+                views: "1,760"
+            },
+            6: {
+                title: "Product Launch",
+                category: "E-commerce",
+                description: "An exciting product launch newsletter that builds anticipation and drives pre-orders. The design uses dynamic visuals and compelling copy to showcase the new product's features and benefits.",
+                date: "January 30, 2023",
+                client: "Tech Gadgets Co.",
+                tags: "E-commerce, Product, Launch",
+                views: "2,890"
+            },
+            7: {
+                title: "Photography Showcase",
+                category: "Creative",
+                description: "A visually stunning newsletter that showcases a photographer's latest work. The design uses a gallery-style layout with large images and minimal text to let the photography speak for itself.",
+                date: "December 5, 2022",
+                client: "Creative Photography",
+                tags: "Creative, Photography, Visual",
+                views: "1,430"
+            },
+            8: {
+                title: "Simple & Clean",
+                category: "Minimal",
+                description: "A minimalist newsletter design that focuses on clarity and readability. With a simple color scheme and clean typography, this design ensures the message is delivered without distractions.",
+                date: "November 18, 2022",
+                client: "Clean Design Co.",
+                tags: "Minimal, Clean, Typography",
+                views: "980"
+            },
+            9: {
+                title: "Healthcare Newsletter",
+                category: "Corporate",
+                description: "A professional and informative newsletter for a healthcare organization. The design presents medical information in an accessible way while maintaining a trustworthy and caring tone.",
+                date: "October 22, 2022",
+                client: "Healthcare Plus",
+                tags: "Corporate, Healthcare, Informative",
+                views: "1,670"
+            }
+        };
+
+        portfolioItemsForModal.forEach((item, index) => {
+            item.addEventListener('click', () => {
+                const data = portfolioData[index + 1];
+                
+                // Update modal content
+                document.querySelector('.modal-image').src = item.querySelector('.portfolio-image').src;
+                document.querySelector('.modal-title').textContent = data.title;
+                document.querySelector('.modal-category').textContent = data.category;
+                document.querySelector('.modal-description').textContent = data.description;
+                
+                // Update modal details
+                const detailTexts = document.querySelectorAll('.detail-text');
+                detailTexts[0].textContent = data.date;
+                detailTexts[1].textContent = data.client;
+                detailTexts[2].textContent = data.tags;
+                detailTexts[3].textContent = data.views + ' views';
+                
+                // Show modal
+                modal.style.display = 'block';
+                document.body.style.overflow = 'hidden';
+            });
+        });
+
+        modalClose.addEventListener('click', () => {
+            modal.style.display = 'none';
+            document.body.style.overflow = 'auto';
+        });
+
+        window.addEventListener('click', (e) => {
+            if (e.target === modal) {
+                modal.style.display = 'none';
+                document.body.style.overflow = 'auto';
+            }
+        });
+
+        // Contact Form
+        document.getElementById('contactForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Create success message
+            const successMessage = document.createElement('div');
+            successMessage.style.padding = '15px';
+            successMessage.style.marginTop = '20px';
+            successMessage.style.backgroundColor = '#4CAF50';
+            successMessage.style.color = 'white';
+            successMessage.style.borderRadius = '4px';
+            successMessage.textContent = 'Thank you for your message! I will get back to you soon.';
+            
+            // Remove any existing success message
+            const existingMessage = document.querySelector('.contact-form .success-message');
+            if (existingMessage) {
+                existingMessage.remove();
+            }
+            
+            // Add success message to form
+            successMessage.classList.add('success-message');
+            this.appendChild(successMessage);
+            
+            // Reset form
+            this.reset();
+            
+            // Remove success message after 5 seconds
+            setTimeout(() => {
+                successMessage.remove();
+            }, 5000);
+        });
+
+        // Header scroll effect
+        window.addEventListener('scroll', function() {
+            const header = document.querySelector('header');
+            if (window.scrollY > 50) {
+                header.style.boxShadow = '0 2px 20px rgba(0, 0, 0, 0.1)';
+            } else {
+                header.style.boxShadow = '0 2px 10px rgba(0, 0, 0, 0.1)';
+            }
+        });
+    </script>
+</body>
+</html>
